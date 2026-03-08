@@ -3,13 +3,13 @@
 
 import styles from './NoteForm.module.css';
 import { useNoteStore, initialDraft } from '@/lib/store/noteStore';
-import { createNote } from '@/lib/api';
+import { createNote } from '@/lib/api/clientApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { NoteFormValues } from '../../types/note';
 import { useRouter } from 'next/navigation';
-
+import { getCategories } from '@/lib/api/clientApi';
 export default function NoteForm() {
-
+  const categories = getCategories();
   const router = useRouter();
   const { draft, setDraft, clearDraft } = useNoteStore();
   const queryClient = useQueryClient();
@@ -78,11 +78,9 @@ export default function NoteForm() {
           onChange={handleDraftChange}
           required
         >
-          <option value="Todo">Todo</option>
-          <option value="Work">Work</option>
-          <option value="Personal">Personal</option>
-          <option value="Meeting">Meeting</option>
-          <option value="Shopping">Shopping</option>
+          {categories.map(tag => (
+            <option key={tag} value={tag}>{tag}</option>
+          ))}
         </select>
       </div>
 

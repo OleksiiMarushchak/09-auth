@@ -1,8 +1,10 @@
 import css from "./SidebarNotes.module.css";
-import Link from 'next/link'
-const tags = ["Work", "Personal", "Study", "Shopping", "Todo"];
+import Link from 'next/link';
+import { getCategories } from "@/lib/api/clientApi";
 
 export default function SidebarNotes() {
+  const tags = getCategories();
+
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
