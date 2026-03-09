@@ -7,9 +7,8 @@ import { createNote } from '@/lib/api/clientApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { NoteFormValues } from '../../types/note';
 import { useRouter } from 'next/navigation';
-import { getCategories } from '@/lib/api/clientApi';
 export default function NoteForm() {
-  const categories = getCategories();
+  const categories = ["Work", "Personal", "Meeting", "Shopping", "Ideas", "Travel", "Finance", "Health", "Important", "Todo"];
   const router = useRouter();
   const { draft, setDraft, clearDraft } = useNoteStore();
   const queryClient = useQueryClient();

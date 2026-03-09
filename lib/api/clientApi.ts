@@ -66,30 +66,29 @@ export const fetchNotes = async (
     return data;
 };
 
-export const fetchNoteById = async (id: string) => {
-    const { data } = await nextServer.get(`/notes/${id}`);
+export const fetchNoteById = async (id: string): Promise<Note> => {
+    const { data } = await nextServer.get<Note>(`/notes/${id}`);
     return data;
 };
 
-export const createNote = async ( note: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>
+export const createNote = async (
+    note: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>
 ): Promise<Note> => {
-    const { data } = await nextServer.post('/notes', note);
+    const { data } = await nextServer.post<Note>('/notes', note);
     return data;
 };
 
-export const deleteNote = async (id: string) => {
-    await nextServer.delete(`/notes/${id}`);
+export const deleteNote = async (id: string): Promise<Note> => {
+    const { data } = await nextServer.delete<Note>(`/notes/${id}`);
+    return data;
 };
 
-
-export type Category = {
-    id: string;
-    name: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-};
-
-export const getCategories = () => {
+/* export const getCategories = () => {
     return ["Work", "Personal", "Meeting", "Shopping", "Ideas", "Travel", "Finance", "Health", "Important", "Todo"];
+};
+ */
+
+export const updateMe = async (data: Partial<User>): Promise<User> => {
+    const res = await nextServer.patch<User>('/users/me', data);
+    return res.data;
 };

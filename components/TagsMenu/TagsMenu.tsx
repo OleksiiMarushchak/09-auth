@@ -3,11 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { getCategories } from '@/lib/api/clientApi';
 import css from './TagsMenu.module.css';
 
 export default function TagsMenu() {
-    const NOTE_TAGS = getCategories();
+    const NOTE_TAGS = ["Work", "Personal", "Meeting", "Shopping", "Ideas", "Travel", "Finance", "Health", "Important", "Todo"];
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 

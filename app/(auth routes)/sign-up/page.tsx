@@ -67,7 +67,7 @@ const SignUp = () => {
                     </button>
                 </div>
 
-                <p className={css.error}>Error</p>
+                {error?<p className={css.error}>Error</p>:null}
             </form>
             
         </main>

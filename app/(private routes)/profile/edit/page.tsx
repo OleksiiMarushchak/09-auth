@@ -2,10 +2,36 @@
 import Image from "next/image";
 import css from "./EditProfilePage.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import { updateMe } from "@/lib/api/clientApi";
 
-export default  function EditProfile() {
-    const { user } = useAuthStore();
+export default function EditProfile() {
+    const { user, setUser } = useAuthStore();
+    const router = useRouter();
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const usernameInput = e.currentTarget.elements.namedItem("username") as HTMLInputElement;
+        const username = usernameInput?.value.trim();
+        const email = user?.email || "";
+        if (!username || !email) {
+            alert("Username and email are required");
+            return;
+        }
+        try {
+            const updatedUser = await updateMe({ username, email });
+            setUser(updatedUser);
+            router.push("/profile");
+        } catch (error) {
+            // TODO: додати обробку помилок
+            console.error(error);
+        }
+    };
+
+    const handleCancel = () => {
+        router.back();
+    };
 
     return (
         <main className={css.mainContent}>
@@ -13,14 +39,14 @@ export default  function EditProfile() {
                 <h1 className={css.formTitle}>Edit Profile</h1>
 
                 <Image
-                    src={user?.avatar || "/default-avatar.png" }
+                    src={user?.avatar || "/default-avatar.png"}
                     alt="User Avatar"
                     width={120}
                     height={120}
                     className={css.avatar}
                 />
 
-                <form className={css.profileInfo}>
+                <form className={css.profileInfo} onSubmit={handleSubmit}>
                     <div className={css.usernameWrapper}>
                         <label htmlFor="username">Username:</label>
                         <input
@@ -37,7 +63,7 @@ export default  function EditProfile() {
                         <button type="submit" className={css.saveButton}>
                             Save
                         </button>
-                        <button type="button" className={css.cancelButton}>
+                        <button type="button" className={css.cancelButton} onClick={handleCancel}>
                             Cancel
                         </button>
                     </div>

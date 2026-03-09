@@ -1,7 +1,6 @@
 // app/notes/action/create/page.tsx
 
 
-import { getCategories } from '@/lib/api/clientApi';
 import css from './CreateNote.module.css';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import type { Metadata } from 'next';
