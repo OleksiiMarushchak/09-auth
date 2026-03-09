@@ -88,7 +88,13 @@ export const deleteNote = async (id: string): Promise<Note> => {
 };
  */
 
-export const updateMe = async (data: Partial<User>): Promise<User> => {
+
+export type UpdateProfileRequest = {
+    username: string;
+    email: string;
+};
+
+export const updateMe = async (data: UpdateProfileRequest): Promise<User> => {
     const res = await nextServer.patch<User>('/users/me', data);
     return res.data;
 };

@@ -67,7 +67,7 @@ const SignIn = () => {
                     </button>
                 </div>
 
-                {error?<p className={css.error}>Error</p>:null}
+                {error ? <p className={css.error}>{error}</p> : null}
             </form>
         </main>
     );

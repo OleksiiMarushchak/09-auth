@@ -1,7 +1,6 @@
 // app/(private routes)/profile/page.tsx
 
 import Link from 'next/link';
-import { getMe } from '@/lib/api/clientApi';
 import css from './ProfilePage.module.css'; 
 import { Metadata } from "next";
 import Image from 'next/image';
