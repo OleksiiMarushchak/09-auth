@@ -44,7 +44,6 @@ interface FetchNotesParams {
     search: string;
     page: number;
     perPage: number;
-    sortBy?: string;
     tag?: string;
 }
 export const fetchNotes = async (
@@ -57,7 +56,7 @@ export const fetchNotes = async (
     search,
     page,
     perPage,
-    sortBy: "created",
+    sortBy: "created" ,
     };
     if (tag) {
         params.tag = tag;
