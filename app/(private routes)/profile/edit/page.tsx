@@ -14,13 +14,12 @@ export default function EditProfile() {
         e.preventDefault();
         const usernameInput = e.currentTarget.elements.namedItem("username") as HTMLInputElement;
         const username = usernameInput?.value.trim();
-        const email = user?.email || "";
-        if (!username || !email) {
-            alert("Username and email are required");
+        if (!username) {
+            alert("Username is required");
             return;
         }
         try {
-            const updatedUser = await updateMe({ username, email });
+            const updatedUser = await updateMe({ username });
             setUser(updatedUser);
             router.push("/profile");
         } catch (error) {

@@ -56,7 +56,6 @@ export const fetchNotes = async (
     search,
     page,
     perPage,
-    sortBy: "created" ,
     };
     if (tag) {
         params.tag = tag;
