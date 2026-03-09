@@ -44,7 +44,7 @@ interface FetchNotesParams {
     search: string;
     page: number;
     perPage: number;
-    sortBy: string;
+    sortBy?: string;
     tag?: string;
 }
 export const fetchNotes = async (
@@ -88,10 +88,8 @@ export const deleteNote = async (id: string): Promise<Note> => {
 };
  */
 
-
-export type UpdateProfileRequest = {
+interface UpdateProfileRequest {
     username: string;
-    email: string;
 };
 
 export const updateMe = async (data: UpdateProfileRequest): Promise<User> => {
